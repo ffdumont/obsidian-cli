@@ -53,4 +53,48 @@ switch ($Task) {
     default {
         Write-Host "Tache inconnue : $Task"
     }
+    "new" {
+        if ($args.Count -eq 0) {
+            Write-Host "❌ Veuillez fournir un nom de commande : make new <nom>"
+            return
+        }
+
+        $commandName = $args[0]
+        $sourcePath = "obsidian_cli\commands\template_command.py"
+        $destPath = "obsidian_cli\commands\$commandName.py"
+
+        if (-not (Test-Path $sourcePath)) {
+            Write-Host "❌ Fichier modèle manquant : $sourcePath"
+            return
+        }
+
+        Copy-Item $sourcePath $destPath
+        (Get-Content $destPath) -replace "nom_de_la_commande", $commandName | Set-Content $destPath
+
+        # Ajoute automatiquement l'import + register dans cli.py
+        $cliPath = "obsidian_cli\cli.py"
+        $importLine = "from obsidian_cli.commands import $commandName"
+        $registerLine = "$commandName.register(app)"
+
+        # Ajoute à la fin du bloc d'import s'il n'est pas déjà là
+        if (-not (Get-Content $cliPath | Select-String $importLine)) {
+            (Get-Content $cliPath) |
+                ForEach-Object {
+                    if ($_ -match "^from obsidian_cli.commands import") {
+                        "$_`, $commandName"
+                    } elseif ($_ -match "^$") {
+                        "$_"
+                    } else {
+                        $_
+                    }
+                } | Set-Content $cliPath
+        }
+
+        # Ajoute le register à la fin si absent
+        if (-not (Get-Content $cliPath | Select-String "$registerLine")) {
+            Add-Content $cliPath "`n$registerLine"
+        }
+
+        Write-Host "✅ Commande '$commandName' créée avec succès dans $destPath"
+    }
 }

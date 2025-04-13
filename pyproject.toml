@@ -20,3 +20,7 @@ source = ["obsidian_cli"]
 
 [tool.coverage.report]
 show_missing = true
+omit = [
+    "obsidian_cli/commands/template_command.py",
+    "obsidian_cli/__main__.py"
+]
