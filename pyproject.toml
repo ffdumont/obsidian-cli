@@ -1,0 +1,22 @@
+[project]
+name = "obsidian-cli"
+version = "0.1.0"
+description = "Un outil CLI pour gérer tes notes Obsidian"
+dependencies = [
+    "typer[all]",
+    "pytest",
+    "pytest-cov"
+]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project.scripts]
+obsidian-cli = "obsidian_cli.cli:app"
+
+[tool.coverage.run]
+source = ["obsidian_cli"]
+
+[tool.coverage.report]
+show_missing = true
