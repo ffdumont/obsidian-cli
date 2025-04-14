@@ -27,11 +27,27 @@ switch ($Task) {
             __pycache__, *.pyc, .coverage, htmlcov
     }
     "reset" {
-        Write-Host "Reinitialisation de l'environnement virtuel..."
-        Remove-Item -Recurse -Force -ErrorAction SilentlyContinue .venv
+        Write-Host "Suppression de l'environnement virtuel existant..."
+        deactivate 2>$null
+        Remove-Item -Recurse -Force .venv -ErrorAction SilentlyContinue
+
+        Write-Host "Creation du nouvel environnement virtuel..."
         python -m venv .venv
-        .\.venv\Scripts\Activate.ps1
-        pip install -r requirements.txt
+
+        Write-Host "Activation de l'environnement virtuel..."
+        . .\.venv\Scripts\Activate.ps1
+
+        Write-Host "Installation du package en mode developpement..."
+        pip install -e .
+
+        Write-Host "Verification de la disponibilite de la commande obsidian-cli..."
+        $cli = Get-Command obsidian-cli -ErrorAction SilentlyContinue
+
+        if ($cli) {
+            Write-Host "obsidian-cli est bien installe : $($cli.Source)"
+        } else {
+            Write-Host "obsidian-cli est introuvable. Verifie ton setup.py ou ton environnement."
+        }   
     }
     "completion" {
         Write-Host "Generation du script de completion PowerShell..."
@@ -100,19 +116,18 @@ switch ($Task) {
 
         Write-Host "✅ Commande '$commandName' créée avec succès dans $destPath"
     }
-    "debug" {
-        Write-Host "🧪 Lancement des tests de debug scan..."
-
-        if ($args.Count -eq 0 -or $args[0] -eq "temp") {
-            Write-Host "→ Debug avec TemporaryDirectory (test_debug_scan)"
-            pytest -s tests/test_scan.py::test_debug_scan
-        } elseif ($args[0] -eq "inspect") {
-            Write-Host "→ Debug avec C:/Temp/debug-scan (test_debug_scan_inspectable)"
-            pytest -s tests/test_scan.py::test_debug_scan_inspectable
+  
+    "clean-tests" {
+        Write-Host "🧹 Suppression des artefacts de test..."
+        $artifactsPath = "G:\Mon Drive\!2-Projects\0240-2504 Obsidian CLI\.pytest-tmp"
+        if (Test-Path $artifactsPath) {
+            Remove-Item -Recurse -Force -ErrorAction SilentlyContinue $artifactsPath
+            Write-Host "✅ Artefacts supprimés : $artifactsPath"
         } else {
-            Write-Host "❌ Usage : make debug [temp|inspect]"
+            Write-Host "ℹ️ Aucun artefact trouvé à : $artifactsPath"
         }
     }
+    
 
     "help" {
         Write-Host "Taches disponibles :"
@@ -124,7 +139,7 @@ switch ($Task) {
         Write-Host "  completion  -> affiche le script de completion PowerShell"
         Write-Host "  dev         -> installe l'environnement de dev complet"
         Write-Host "  new <nom>   -> genere une nouvelle commande CLI"
-        Write-Host "  debug       -> lance un test de debug sur la commande scan (temp ou inspect)"
+        Write-Host "  clean-tests -> supprime les artefacts de test"
     }
     default {
         Write-Host "Tache inconnue : $Task"

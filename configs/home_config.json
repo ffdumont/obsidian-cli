@@ -12,10 +12,11 @@
       "idea": ["project", "task"]
     }
   },
-  "naming": {
-    "task": "TTT - {title}",
-    "project": "PPP - {title}",
-    "area": "AAA - {title}"
+  "namingPattern": {
+    "area": "{classifier} {name}",
+    "project": "{classifier}-{date:yyMM} {name}",
+    "task": "{name}"
   },
+  "dateFormat": "%y%m",
   "debug": true
 }

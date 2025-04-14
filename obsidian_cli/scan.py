@@ -1,32 +1,37 @@
-import yaml
+# obsidian_cli/scan.py
 from pathlib import Path
+import frontmatter
+from typing import Dict
 
-def scan_vault(vault_path: Path) -> dict:
+def scan_vault(base_path: Path) -> Dict[str, dict]:
     index = {}
-    current_id = 1
+    counter = 1
 
-    for md_file in vault_path.rglob("*.md"):
-        content = md_file.read_text(encoding="utf-8")
+    for path in sorted(base_path.rglob("*.md")):
+        with path.open(encoding="utf-8") as f:
+            post = frontmatter.load(f)
 
-        # Frontmatter YAML attendu entre ---
-        if content.startswith("---"):
-            try:
-                _, frontmatter, _ = content.split("---", 2)
-                meta = yaml.safe_load(frontmatter)
-            except Exception:
-                continue  # Frontmatter mal formé, on ignore
+        metadata = post.metadata
+        if not metadata.get("uuid") or not metadata.get("type") or not metadata.get("title"):
+            continue
 
-            # Clés obligatoires
-            if not all(k in meta for k in ("uuid", "type", "title")):
-                continue
+        key = f"{counter:05d}"
+        entry = {
+            "uuid": metadata["uuid"],
+            "type": metadata["type"],
+            "title": metadata["title"],
+            "path": str(path.relative_to(base_path)).replace("\\", "/"),
+            "links": []  # ✅ Initialisation des liens ici
+        }
 
-            key = str(current_id).zfill(5)
-            index[key] = {
-                "uuid": meta["uuid"],
-                "type": meta["type"],
-                "title": meta["title"],
-                "path": str(md_file.relative_to(vault_path)).replace("\\", "/")
-            }
-            current_id += 1
+        # ✅ Ajout du lien parent si existant
+        if "parent" in metadata:
+            entry["links"].append({
+                "type": "parent",
+                "target": metadata["parent"]
+            })
+
+        index[key] = entry
+        counter += 1
 
     return index
