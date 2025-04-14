@@ -1,4 +1,4 @@
-param (
+﻿param (
     [string]$Task = "help"
 )
 
@@ -14,7 +14,7 @@ switch ($Task) {
             Write-Host "Ouverture du rapport de couverture HTML..."
             Start-Process "htmlcov\index.html"
         } else {
-            Write-Host "⚠️ Rapport HTML introuvable"
+            Write-Host "Rapport HTML introuvable"
         }
     }
     "freeze" {
@@ -41,17 +41,20 @@ switch ($Task) {
             Write-Host "Erreur : obsidian-cli non trouve ou non installable"
         }
     }
-    "help" {
-        Write-Host "Taches disponibles :"
-        Write-Host "  install     -> pip install -r requirements.txt"
-        Write-Host "  test        -> pytest avec coverage"
-        Write-Host "  freeze      -> pip-compile requirements.in"
-        Write-Host "  clean       -> suppression des fichiers temporaires"
-        Write-Host "  reset       -> supprime et recree l'environnement virtuel"
-        Write-Host "  completion  -> affiche le script de completion PowerShell"
-    }
-    default {
-        Write-Host "Tache inconnue : $Task"
+    "dev" {
+        Write-Host "Installation de l'environnement de développement..."
+        
+        if (-not (Test-Path "requirements.txt")) {
+            Write-Host "Génération de requirements.txt..."
+            pip-compile requirements.in
+        }
+
+        if (-not (Test-Path "requirements-dev.txt")) {
+            Write-Host "Génération de requirements-dev.txt..."
+            pip-compile requirements-dev.in
+        }
+
+        pip install -r requirements-dev.txt
     }
     "new" {
         if ($args.Count -eq 0) {
@@ -96,5 +99,34 @@ switch ($Task) {
         }
 
         Write-Host "✅ Commande '$commandName' créée avec succès dans $destPath"
+    }
+    "debug" {
+        Write-Host "🧪 Lancement des tests de debug scan..."
+
+        if ($args.Count -eq 0 -or $args[0] -eq "temp") {
+            Write-Host "→ Debug avec TemporaryDirectory (test_debug_scan)"
+            pytest -s tests/test_scan.py::test_debug_scan
+        } elseif ($args[0] -eq "inspect") {
+            Write-Host "→ Debug avec C:/Temp/debug-scan (test_debug_scan_inspectable)"
+            pytest -s tests/test_scan.py::test_debug_scan_inspectable
+        } else {
+            Write-Host "❌ Usage : make debug [temp|inspect]"
+        }
+    }
+
+    "help" {
+        Write-Host "Taches disponibles :"
+        Write-Host "  install     -> pip install -r requirements.txt"
+        Write-Host "  test        -> pytest avec coverage"
+        Write-Host "  freeze      -> pip-compile requirements.in"
+        Write-Host "  clean       -> suppression des fichiers temporaires"
+        Write-Host "  reset       -> supprime et recree l'environnement virtuel"
+        Write-Host "  completion  -> affiche le script de completion PowerShell"
+        Write-Host "  dev         -> installe l'environnement de dev complet"
+        Write-Host "  new <nom>   -> genere une nouvelle commande CLI"
+        Write-Host "  debug       -> lance un test de debug sur la commande scan (temp ou inspect)"
+    }
+    default {
+        Write-Host "Tache inconnue : $Task"
     }
 }

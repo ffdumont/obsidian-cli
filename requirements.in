@@ -1,3 +1,2 @@
 typer[all]
-pytest
-pytest-cov
+pyyaml
