@@ -1,0 +1,21 @@
+{
+  "vault_path": "G:/Mon Drive/",
+  "templates_path": "G:/Mon Drive/!5-Resources/0200 Gestion du Système d'Information/0270 Modèles",
+  "structure": ["area", "project", "task"],
+  "relationships": {
+    "parent": {
+      "task": ["project"],
+      "project": ["area"]
+    },
+    "sibling": {
+      "url": ["task"],
+      "idea": ["project", "task"]
+    }
+  },
+  "naming": {
+    "task": "TTT - {title}",
+    "project": "PPP - {title}",
+    "area": "AAA - {title}"
+  },
+  "debug": true
+}
