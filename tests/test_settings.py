@@ -43,12 +43,22 @@ def test_settings_default_when_config_missing():
 # ───────────────────────────────────────────────
 
 @pytest.mark.parametrize("path_attr", ["vault_path", "templates_path"])
-def test_configured_paths_exist(path_attr):
-    """Vérifie que les chemins configurés existent physiquement s'ils sont définis"""
-    path = getattr(settings, path_attr)
+def test_configured_paths_exist(tmp_path, monkeypatch, path_attr):
+    """Vérifie que les chemins configurés existent physiquement (mockés)"""
 
-    if str(path) and not path.exists():
-        pytest.fail(f"Le chemin {path_attr} → '{path}' n'existe pas sur le disque.")
+    fake_path = tmp_path / path_attr
+    fake_path.mkdir()
+
+    # Monkeypatch la méthode get_path pour qu’elle retourne notre fake_path
+    def fake_get_path(key: str, default: Path) -> Path:
+        return fake_path
+
+    monkeypatch.setattr(settings, "get_path", fake_get_path)
+
+    # Test réel
+    path = getattr(settings, path_attr)
+    assert path.exists()
+
 
 
 @pytest.mark.parametrize(

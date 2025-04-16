@@ -4,3 +4,55 @@
 #
 #    pip-compile requirements-dev.in
 #
+black==25.1.0
+    # via -r requirements-dev.in
+build==1.2.2.post1
+    # via pip-tools
+click==8.1.8
+    # via
+    #   -c requirements.txt
+    #   black
+    #   pip-tools
+colorama==0.4.6
+    # via
+    #   -c requirements.txt
+    #   build
+    #   click
+    #   pytest
+coverage[toml]==7.8.0
+    # via pytest-cov
+iniconfig==2.1.0
+    # via pytest
+mypy-extensions==1.0.0
+    # via black
+packaging==24.2
+    # via
+    #   black
+    #   build
+    #   pytest
+pathspec==0.12.1
+    # via black
+pip-tools==7.4.1
+    # via -r requirements-dev.in
+platformdirs==4.3.7
+    # via black
+pluggy==1.5.0
+    # via pytest
+pyproject-hooks==1.2.0
+    # via
+    #   build
+    #   pip-tools
+pytest==8.3.5
+    # via
+    #   -r requirements-dev.in
+    #   pytest-cov
+pytest-cov==6.1.1
+    # via -r requirements-dev.in
+ruff==0.11.5
+    # via -r requirements-dev.in
+wheel==0.45.1
+    # via pip-tools
+
+# The following packages are considered to be unsafe in a requirements file:
+# pip
+# setuptools
