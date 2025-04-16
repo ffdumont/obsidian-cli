@@ -3,11 +3,6 @@
 )
 
 switch ($Task) {
-    "install" {
-        Write-Host "Installation des dépendances de production..."
-        pip install -r requirements.txt
-    }
-
     "test" {
         Write-Host "Lancement des tests avec couverture..."
         pytest --cov=obsidian_cli --cov-report=term --cov-report=html
@@ -68,6 +63,7 @@ switch ($Task) {
             pip-compile requirements-dev.in
         }
 
+        pip install -r requirements.txt
         pip install -r requirements-dev.txt
 
         Write-Host "✅ Installation terminée. Tu peux utiliser obsidian-cli si tout est bien configuré."
@@ -126,7 +122,6 @@ switch ($Task) {
 
     "help" {
         Write-Host "Tâches disponibles :"
-        Write-Host "  install     -> Installe requirements.txt"
         Write-Host "  test        -> Tests unitaires avec coverage"
         Write-Host "  clean       -> Nettoyage complet du projet"
         Write-Host "  dev         -> Crée et installe l'env de dev complet"
