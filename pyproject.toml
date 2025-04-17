@@ -24,3 +24,5 @@ omit = [
     "obsidian_cli/commands/template_command.py",
     "obsidian_cli/__main__.py"
 ]
+[tool.setuptools]
+packages = ["obsidian_cli"]

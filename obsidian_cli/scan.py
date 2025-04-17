@@ -1,6 +1,7 @@
 from pathlib import Path
 import frontmatter
-from typing import Dict, List
+from typing import Dict, List, Optional, Union
+import json
 import uuid as uuidlib
 from obsidian_cli.helpers.naming import generate_key
 
@@ -15,6 +16,7 @@ def generate_uuid() -> str:
 
 def scan_vault(
     base_path: Path,
+    index_path: Optional[Union[str, Path]] = None,
     write: bool = False,
     dry_run: bool = False,
     force: bool = False
@@ -78,5 +80,11 @@ def scan_vault(
             print(f"- {filename}")
             for change in changes:
                 print(f"  {change}")
+
+    if write:
+        output_path = Path(index_path) if index_path else base_path / "uuid_index.json"
+        with output_path.open("w", encoding="utf-8") as f:
+            json.dump(index, f, indent=2, ensure_ascii=False)
+        print(f"✅ Index écrit dans : {output_path}")
 
     return index
