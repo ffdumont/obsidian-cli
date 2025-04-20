@@ -5,7 +5,7 @@
 switch ($Task) {
     "test" {
         Write-Host "Lancement des tests avec couverture..."
-        pytest --cov=obsidian_cli --cov-report=term --cov-report=html
+        pytest --cov=obsidian_cli tests/ --cov-report=term --cov-report=html
         if (Test-Path "htmlcov\index.html") {
             Write-Host "Ouverture du rapport de couverture HTML..."
             Start-Process "htmlcov\index.html"

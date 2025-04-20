@@ -3,7 +3,7 @@ from pathlib import Path
 import pytest
 from obsidian_cli.settings import Settings
 from obsidian_cli.ontology import Ontology
-from obsidian_cli.commands.create import create_note
+from obsidian_cli.create import create_note
 
 def test_create_note(tmp_path_base: Path):
     # Simulation de la config
