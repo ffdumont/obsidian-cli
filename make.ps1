@@ -14,35 +14,36 @@ switch ($Task) {
         }
     }
 
-    "clean" {
-        Write-Host "🧹 Nettoyage complet..."
+"clean" {
+    Write-Host "🧹 Nettoyage complet..."
 
-        $patterns = @(
-            ".venv",
-            "__pycache__",
-            "*.pyc",
-            "htmlcov",
-            ".coverage",
-            "requirements.txt",
-            "*.egg-info",
-            "dist",
-            "build",
-            ".pytest_cache"
-        )
+    $patterns = @(
+        ".venv",
+        "__pycache__",
+        "*.pyc",
+        "htmlcov",
+        ".coverage",
+        "requirements.txt",
+        "*.egg-info",
+        "dist",
+        "build",
+        ".pytest_cache"
+    )
 
-        foreach ($pattern in $patterns) {
-            Get-ChildItem -Path . -Include $pattern -Recurse -Force -ErrorAction SilentlyContinue |
-                Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
-        }
-
-        $testArtifacts = "G:\Mon Drive\!2-Projects\0240-2504 Obsidian CLI\.pytest-tmp"
-        if (Test-Path $testArtifacts) {
-            Remove-Item -Recurse -Force $testArtifacts -ErrorAction SilentlyContinue
-            Write-Host "✅ Artefacts supprimés : $testArtifacts"
-        }
-
-        Write-Host "✅ Environnement et fichiers nettoyés"
+    foreach ($pattern in $patterns) {
+        Get-ChildItem -Path . -Recurse -Force -ErrorAction SilentlyContinue |
+            Where-Object { $_.Name -like $pattern -or $_.FullName -like "*\$pattern" } |
+            Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
     }
+
+    $testArtifacts = "G:\Mon Drive\!2-Projects\0240-2504 Obsidian CLI\.pytest-tmp"
+    if (Test-Path $testArtifacts) {
+        Remove-Item -Recurse -Force $testArtifacts -ErrorAction SilentlyContinue
+        Write-Host "✅ Artefacts supprimés : $testArtifacts"
+    }
+
+    Write-Host "✅ Environnement et fichiers nettoyés"
+}
 
     "dev" {
         Write-Host "🔧 Création de l'environnement de développement..."
@@ -51,7 +52,7 @@ switch ($Task) {
         . .\.venv\Scripts\Activate.ps1
 
         Write-Host "📦 Installation de pip-tools (si besoin)..."
-        pip install pip-tools
+        
 
         if (Test-Path "requirements.in") {
             Write-Host "📦 Compilation requirements.txt..."
@@ -119,6 +120,29 @@ switch ($Task) {
 
         Write-Host "✅ Commande '$commandName' créée avec succès dans $destPath"
     }
+
+    "install" {
+        Write-Host "📥 Installation locale du package en mode développement..."
+
+        if (-not (Test-Path ".venv")) {
+            Write-Host "❌ Environnement virtuel non trouvé. Exécute 'make venv' d'abord."
+            return
+        }
+
+        .\.venv\Scripts\Activate.ps1
+
+        pip install --editable . > $null
+
+        if ($LASTEXITCODE -eq 0) {
+            Write-Host "✅ Package installé en mode développement."
+            Write-Host "💡 Tu peux lancer la commande 'obsidian-cli' directement."
+        } else {
+            Write-Host "❌ Erreur pendant l'installation."
+        }
+    }
+
+
+
 
     "help" {
         Write-Host "Tâches disponibles :"

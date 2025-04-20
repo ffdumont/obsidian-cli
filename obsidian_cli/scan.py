@@ -1,5 +1,6 @@
 from pathlib import Path
 import frontmatter
+from typer import echo
 from typing import Dict, List, Optional, Union
 import json
 import uuid as uuidlib
@@ -21,17 +22,28 @@ def scan_vault(
     dry_run: bool = False,
     force: bool = False
 ) -> Dict[str, dict]:
+    print(f"📁 Scanning folder: {base_path}")
     index = {}
     used_keys = set()
     modifications = []
 
     for path in sorted(base_path.rglob("*.md")):
-        post = frontmatter.load(path)
+        # Exclusion des fichiers modèles
+        if "Modèles" in path.parts or path.name.endswith("template.md"):
+            echo(f"⏭ Fichier ignoré (modèle détecté) : {path}")
+            continue
+
+        try:
+            post = frontmatter.load(path)
+        except Exception as e:
+            echo(f"❌ Erreur lors du parsing de {path} : {e}")
+            continue
+
         metadata = post.metadata
         modified = False
         changes = []
 
-        note_type = metadata.get("type")
+        note_type = metadata.get("type") or metadata.get("Type")
         note_uuid = metadata.get("uuid")
         current_key = metadata.get("key")
 
@@ -73,7 +85,6 @@ def scan_vault(
                 post.metadata = metadata
                 with open(path, "w", encoding="utf-8") as f:
                     f.write(frontmatter.dumps(post))
-
     if dry_run and modifications:
         print("💡 Modifications détectées (dry-run) :")
         for filename, changes in modifications:

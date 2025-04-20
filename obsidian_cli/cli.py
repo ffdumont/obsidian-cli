@@ -11,3 +11,6 @@ from obsidian_cli.commands import hello, version
 hello.register(app)
 version.register(app)
 scan.register(app)
+
+if __name__ == "__main__":
+    app()
