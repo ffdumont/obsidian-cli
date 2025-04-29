@@ -1,5 +1,6 @@
 import frontmatter
 from pathlib import Path
+from obsidian_cli.helpers.file_ops import safe_frontmatter_write
 
 def clean_vault(vault_path: Path):
     count = 0
@@ -27,8 +28,7 @@ def clean_vault(vault_path: Path):
                     modified = True
 
         if modified:
-            with path.open("w", encoding="utf-8") as f:
-                f.write(frontmatter.dumps(post))
+            safe_frontmatter_write(post, path)
             print(f"✅ Nettoyé : {path}")
             count += 1
 

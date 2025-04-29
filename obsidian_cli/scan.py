@@ -5,6 +5,10 @@ from typing import Dict, Optional, Union
 from tqdm import tqdm  # pour la barre de progression
 from obsidian_cli.helpers.naming import generate_key
 from obsidian_cli.settings import Settings
+from obsidian_cli.helpers.file_ops import safe_frontmatter_write
+
+import tempfile
+import shutil
 
 def generate_uuid() -> str:
     import uuid
@@ -24,6 +28,7 @@ def scan_vault(
     used_keys = set()
     modifications = []
     scan_log = {"missing_type": [], "unknown_type": []}
+    log_entries = []
 
     settings = Settings(Path(config_path) if config_path else None)
     structure = settings.config.get("structure", {})
@@ -37,7 +42,13 @@ def scan_vault(
 
         try:
             post = frontmatter.load(path)
-        except Exception:
+        except Exception as e:
+            log_entries.append({
+                "path": str(path.relative_to(base_path)).replace("\\", "/"),
+                "status": "error",
+                "changes": [],
+                "error": str(e)
+            })
             continue
 
         metadata = post.metadata
@@ -48,7 +59,13 @@ def scan_vault(
 
         if not note_type:
             scan_log["missing_type"].append(str(path.relative_to(base_path)))
-            continue  # Passe au fichier suivant
+            log_entries.append({
+                "path": str(path.relative_to(base_path)).replace("\\", "/"),
+                "status": "skipped",
+                "changes": [],
+                "error": "Type manquant"
+            })
+            continue
 
         note_type = note_type.lower()
 
@@ -91,8 +108,14 @@ def scan_vault(
                 modifications.append((path.name, changes))
             elif write:
                 post.metadata = metadata
-                with open(path, "w", encoding="utf-8") as f:
-                    f.write(frontmatter.dumps(post))
+                safe_frontmatter_write(post, path)
+
+        log_entries.append({
+            "path": str(path.relative_to(base_path)).replace("\\", "/"),
+            "status": "modified" if modified else "unchanged",
+            "changes": changes,
+            "error": None
+        })
 
     if dry_run and modifications:
         print("\n💡 Modifications détectées (dry-run) :")
@@ -114,5 +137,11 @@ def scan_vault(
         with log_path.open("w", encoding="utf-8") as f:
             json.dump(scan_log, f, indent=2, ensure_ascii=False)
         print(f"📄 Log de scan écrit dans : {log_path}")
+
+        # Écriture du log détaillé par fichier
+        detailed_log_path = output_path.parent / "index_log.json"
+        with detailed_log_path.open("w", encoding="utf-8") as f:
+            json.dump({"notes": log_entries}, f, indent=2, ensure_ascii=False)
+        print(f"📄 Log détaillé écrit dans : {detailed_log_path}")
 
     return index
