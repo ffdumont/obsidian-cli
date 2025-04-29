@@ -5,6 +5,7 @@ from uuid import uuid4
 from datetime import datetime
 import yaml
 import typer
+import json
 import re
 
 from obsidian_cli.helpers.naming import generate_filename
@@ -14,36 +15,34 @@ from obsidian_cli.ontology import Ontology
 from obsidian_cli.helpers.obsidian import find_daily_notes_folder
 
 import frontmatter
-import re
-from pathlib import Path
 
-def generate_next_key(vault_path: Path, note_type: str, structure_map: dict) -> str:
+
+def generate_next_key(uuid_index: dict, note_type: str, structure_map: dict) -> str:
     """
-    Génère la prochaine clé unique pour un type de note donné (ex : P-001, A-002).
+    Génère la prochaine clé unique pour un type de note donné (ex : P-001, A-002),
+    en utilisant uniquement l'index uuid_index.
     """
     note_type = note_type.lower()
 
-    prefix = None
-    if note_type in structure_map and "prefix" in structure_map[note_type]:
-        prefix = structure_map[note_type]["prefix"]
-    else:
+    if note_type not in structure_map or "prefix" not in structure_map[note_type]:
         raise ValueError(f"❌ Aucun préfixe défini pour le type '{note_type}' dans structure.")
+
+    prefix = structure_map[note_type]["prefix"]
 
     existing_numbers = []
 
-    for path in vault_path.rglob("*.md"):
-        try:
-            post = frontmatter.load(path)
-            key = post.metadata.get("key")
-            if key and isinstance(key, str) and key.startswith(prefix):
-                suffix = key[len(prefix):].lstrip("-")
-                if suffix.isdigit():
-                    existing_numbers.append(int(suffix))
-        except Exception:
-            continue
+    for entry in uuid_index.values():
+        entry_type = entry.get("type", "").lower()
+        entry_key = entry.get("key", "")
+
+        if entry_type == note_type and isinstance(entry_key, str) and entry_key.startswith(prefix):
+            suffix = entry_key[len(prefix):].lstrip("-")
+            if suffix.isdigit():
+                existing_numbers.append(int(suffix))
 
     next_num = max(existing_numbers, default=0) + 1
     return f"{prefix}-{next_num:03}"
+
 
 def create_note(
     note_type: str,
@@ -62,7 +61,15 @@ def create_note(
     naming_patterns = settings.config.get("namingPattern", {})
     pattern = naming_patterns.get(note_type, "{name}")
     date_format = settings.config.get("dateFormat", "%y%m")
-    key_prefixes = settings.config.get("keyPrefixes", {})  # ✅ On lit ici
+    key_prefixes = settings.config.get("keyPrefixes", {})
+
+    # Charger l'index UUID
+    uuid_index_path = vault_path / "uuid_index.json"
+    if uuid_index_path.exists():
+        with open(uuid_index_path, "r", encoding="utf-8") as f:
+            uuid_index = json.load(f)
+    else:
+        uuid_index = {}
 
     # Charger les classifieurs
     classifier_file = Path(settings.config.get("classificationPath", ""))
@@ -89,7 +96,7 @@ def create_note(
             raise ValueError(f"❌ Classifieur '{classifier_code}' inconnu. Abandon.")
 
     # Générer la clé
-    key = generate_next_key(vault_path, note_type, key_prefixes)
+    key = generate_next_key(uuid_index, note_type, settings.config.get("structure", {}))
 
     # Générer le nom de fichier
     filename = generate_filename(
@@ -140,5 +147,19 @@ def create_note(
         yaml.dump(metadata, f, sort_keys=False, allow_unicode=True)
         f.write("---\n\n")
         f.write(content)
+        
+        # 1. Mise à jour de l'index
+        uuid = metadata["uuid"]
+        uuid_index[uuid] = {
+            "type": note_type,
+            "key": key,
+            "title": title,
+            "path": str(file_path.relative_to(vault_path)),
+            "created": metadata["created"],
+        }
 
-    return file_path
+        # 2. Sauvegarde de l'index
+        with open(uuid_index_path, "w", encoding="utf-8") as f:
+            json.dump(uuid_index, f, indent=2, ensure_ascii=False)
+
+    return file_path, key

@@ -1,0 +1,101 @@
+PS C:\Users\franc\source\repos\obsidian-cli> & c:/Users/franc/source/repos/obsidian-cli/.venv/Scripts/python.exe c:/Users/franc/source/repos/obsidian-cli/restore.py
+🔎 Traitement de : 2366-2410 TP Carte VAC.md
+✅ Fichier 2366-2410 TP Carte VAC.md restauré depuis la révision 0BzG39yV_0IdPLzNYQURJMXo2eDYzMDZVUnc1M2JoZHlISVl3PQ
+🔎 Traitement de : Déclaration H1.md
+⚠️ Moins de 3 révisions pour Déclaration H1.md, on utilise la plus récente.
+✅ Fichier Déclaration H1.md restauré depuis la révision 0BzG39yV_0IdPaElIS2djNFFSQUcvMExySXA1Y1E4amIrZTFRPQ
+🔎 Traitement de : 1000-2504 new project.md
+✅ Fichier 1000-2504 new project.md restauré depuis la révision 0BzG39yV_0IdPK1R5SlVNak1yQnBzbkM0OE1MeUtXMnoxMXZNPQ
+🔎 Traitement de : 1000-2504 new project 2.md
+✅ Fichier 1000-2504 new project 2.md restauré depuis la révision 0BzG39yV_0IdPSld0cFRPaFNoNnNHeHh1Q3QrU1RZYnlzMXJzPQ
+🔎 Traitement de : 1000-2504 new project 3.md
+✅ Fichier 1000-2504 new project 3.md restauré depuis la révision 0BzG39yV_0IdPbUc3QjhRZDR6SXdNQW9MZnMzeHlDaFZYVXJnPQ
+🔎 Traitement de : 1000-2504 project 28 04.md
+⚠️ Moins de 3 révisions pour 1000-2504 project 28 04.md, on utilise la plus récente.
+✅ Fichier 1000-2504 project 28 04.md restauré depuis la révision 0BzG39yV_0IdPa1g2UjJjSERZcDBnUGEweWJaaEZlUHFhaVA4PQ
+🔎 Traitement de : 1000-2504 project 28 04 2.md
+⚠️ Moins de 3 révisions pour 1000-2504 project 28 04 2.md, on utilise la plus récente.
+✅ Fichier 1000-2504 project 28 04 2.md restauré depuis la révision 0BzG39yV_0IdPUlZpRzlRQlVaak1ick5FWGd3M0NMb1JCYjdJPQ
+🔎 Traitement de : 1000-2504 project 28 04 3.md
+✅ Fichier 1000-2504 project 28 04 3.md restauré depuis la révision 0BzG39yV_0IdPa0NNUzdSN29pZDcyZ2dSV1VqWmRlalFjWFVzPQ
+🔎 Traitement de : 1000-2504 project 28 04 4.md
+⚠️ Moins de 3 révisions pour 1000-2504 project 28 04 4.md, on utilise la plus récente.
+✅ Fichier 1000-2504 project 28 04 4.md restauré depuis la révision 0BzG39yV_0IdPMVZtMnUrOXVmQTJjbmsrVWlORWl3ZnlRZWpRPQ
+🔎 Traitement de : 1000-2504 project 28 04 5.md
+⚠️ Moins de 3 révisions pour 1000-2504 project 28 04 5.md, on utilise la plus récente.
+✅ Fichier 1000-2504 project 28 04 5.md restauré depuis la révision 0BzG39yV_0IdPWkpqWWtpU2NkRkdSQmtzSmJKSld6dHZMTHhjPQ
+🔎 Traitement de : 1000-2504 project 28 04 6.md
+⚠️ Moins de 3 révisions pour 1000-2504 project 28 04 6.md, on utilise la plus récente.
+✅ Fichier 1000-2504 project 28 04 6.md restauré depuis la révision 0BzG39yV_0IdPdTNPZC80UmhBbHh3S2VYbFJRN0h1R1dMUSs0PQ
+🔎 Traitement de : Garmin GPSMAP 695.md
+✅ Fichier Garmin GPSMAP 695.md restauré depuis la révision 0BzG39yV_0IdPOXgwUlJRbDlya081UEJ5ZXZDUHRQV2pSRE5VPQ
+🔎 Traitement de : Competence Based Training.md
+✅ Fichier Competence Based Training.md restauré depuis la révision 0BzG39yV_0IdPYnNrZXpiQWl4RTlWMjlEajkzbjgxZ0M0WUZZPQ
+🔎 Traitement de : Atterrissage vent traversier.md
+✅ Fichier Atterrissage vent traversier.md restauré depuis la révision 0BzG39yV_0IdPNTFyOU82b1NKNm9IcUxSQkt0S0swTkhLaWVJPQ
+🔎 Traitement de : Tour de piste adapté.md
+✅ Fichier Tour de piste adapté.md restauré depuis la révision 0BzG39yV_0IdPY2FxaHM4ZHJ5L3NHVFk1R2xSNjJvTnZObGdNPQ
+🔎 Traitement de : Roulage.md
+✅ Fichier Roulage.md restauré depuis la révision 0BzG39yV_0IdPUW0xRFZCTkYrTERkOGFSWGNIWmFYYkpmT2tNPQ
+🔎 Traitement de : Visualisation de la trajectoire.md
+✅ Fichier Visualisation de la trajectoire.md restauré depuis la révision 0BzG39yV_0IdPNmFmanJPcjIzMDVILzVwQjVqVzdSMzdqa2RVPQ
+🔎 Traitement de : Point de descente (POD, TOD).md
+✅ Fichier Point de descente (POD, TOD).md restauré depuis la révision 0BzG39yV_0IdPYzhzUXJsVFUzUXNpQ25hWE1iNzg0bG1vSjBJPQ
+🔎 Traitement de : Encadrement.md
+✅ Fichier Encadrement.md restauré depuis la révision 0BzG39yV_0IdPcGJPbW55WCtzZitnWElOVG9waTdJV1l1TU1JPQ
+🔎 Traitement de : PTU.md
+✅ Fichier PTU.md restauré depuis la révision 0BzG39yV_0IdPbHJteGpxRjJVSXJib3VNV3UrOUlpd3pQa1hNPQ
+🔎 Traitement de : Panne moteur en campagne.md
+✅ Fichier Panne moteur en campagne.md restauré depuis la révision 0BzG39yV_0IdPaHRXalpNeEVoalAyZktUTDcwQWtQMWlsM2YwPQ
+🔎 Traitement de : Symboles du temps significatif (TEMSI).md
+✅ Fichier Symboles du temps significatif (TEMSI).md restauré depuis la révision 0BzG39yV_0IdPRE9GUjVRbTVKR1N4endzVVp6bWIwSDV4djZJPQ
+🔎 Traitement de : DA40-D-AFM-complete.pdf.md
+⚠️ Moins de 3 révisions pour DA40-D-AFM-complete.pdf.md, on utilise la plus récente.
+✅ Fichier DA40-D-AFM-complete.pdf.md restauré depuis la révision 0BzG39yV_0IdPak0rRzk5VU5jMHJ5bG9POG0weFNTU3h0eVlRPQ
+🔎 Traitement de : Da40.md
+⚠️ Moins de 3 révisions pour Da40.md, on utilise la plus récente.
+✅ Fichier Da40.md restauré depuis la révision 0BzG39yV_0IdPM2VkRGxibTgwMlZJSHJaNHBXMTNSMy9VT3FBPQ
+🔎 Traitement de : 1000-2308 Camera IP.md
+✅ Fichier 1000-2308 Camera IP.md restauré depuis la révision 0BzG39yV_0IdPM0luS2Fpdm5sTHA1K2k3VzJ4SFZZMTdjK09rPQ
+🔎 Traitement de : 1000-2401 Mangeoire Photo.md
+✅ Fichier 1000-2401 Mangeoire Photo.md restauré depuis la révision 0BzG39yV_0IdPaGgzSkZmMmNxbFFxTkZOUHQ0Y0V3dDhjVllNPQ
+🔎 Traitement de : 4220-02_2403 LFQO-LFQL-LFQQ.md
+✅ Fichier 4220-02_2403 LFQO-LFQL-LFQQ.md restauré depuis la révision 0BzG39yV_0IdPK0tCai9XcmNsb1crNlNzbnFvZGROb2x1ckh3PQ
+🔎 Traitement de : 4220-02_2403 LFXU-LFPX-LFXU.md
+✅ Fichier 4220-02_2403 LFXU-LFPX-LFXU.md restauré depuis la révision 0BzG39yV_0IdPMzl3VExNYVRGUVdlWXFrNE1UR2M1MGYyNUwwPQ
+🔎 Traitement de : 4120-2406 LFXU-LFPU-LFXU.md
+✅ Fichier 4120-2406 LFXU-LFPU-LFXU.md restauré depuis la révision 0BzG39yV_0IdPMG9MMUFZcVBFMmdXNGt1SjVKZjFxUlBFajFnPQ
+🔎 Traitement de : 4120-2404 LFXU-LFPX-LFOR-LFON-LFXU.md
+✅ Fichier 4120-2404 LFXU-LFPX-LFOR-LFON-LFXU.md restauré depuis la révision 0BzG39yV_0IdPTThtVDZCc2ZuY05BWDUrdWFCWHdTbFc0OTQ4PQ
+🔎 Traitement de : 4120-2405 LFXU-LFOI.md
+✅ Fichier 4120-2405 LFXU-LFOI.md restauré depuis la révision 0BzG39yV_0IdPcUdmSjFBalprc1NTWkR3SjdSblBTY2E2VXRrPQ
+🔎 Traitement de : 4120-2405 LFOI-LFXU.md
+✅ Fichier 4120-2405 LFOI-LFXU.md restauré depuis la révision 0BzG39yV_0IdPeWQrcW1lY2Jud3RDUDJCZ0lmWTZEaDNYZ2RBPQ
+🔎 Traitement de : 4120-2404 User WPT Log Nav.md
+✅ Fichier 4120-2404 User WPT Log Nav.md restauré depuis la révision 0BzG39yV_0IdPTVNlaWdwb3ZZRXRmaTZWM1FrRjNSOXZ1RFlFPQ
+🔎 Traitement de : 4100-2310 Horameter App.md
+✅ Fichier 4100-2310 Horameter App.md restauré depuis la révision 0BzG39yV_0IdPcWhzdW5OWVhpQmpBVFFBV1J6MEZrdVp4aWdZPQ
+🔎 Traitement de : 4100-2407 WINTEM.md
+✅ Fichier 4100-2407 WINTEM.md restauré depuis la révision 0BzG39yV_0IdPdUprTzQ0SFRiK2JIcWJiQlZYTEZOUW9vNlZ3PQ
+🔎 Traitement de : 4120-2404 Vol SOLO NAV 2 (34 35).md
+✅ Fichier 4120-2404 Vol SOLO NAV 2 (34 35).md restauré depuis la révision 0BzG39yV_0IdPd2lURVRwRmtSMUlqVFprbm1FRElWNGVyMVRnPQ
+🔎 Traitement de : 4100 Préparation Epreuve Pratique.md
+✅ Fichier 4100 Préparation Epreuve Pratique.md restauré depuis la révision 0BzG39yV_0IdPd1k2YzJ0MFN5SFFOZVRsa2REMVUzVGdjRS9zPQ
+🔎 Traitement de : 4120-2402 Vol 33 Leçon 28.md
+✅ Fichier 4120-2402 Vol 33 Leçon 28.md restauré depuis la révision 0BzG39yV_0IdPWFRsSFgyT1cxYzJISXNIK0VXMG9vZlBmNFZFPQ
+🔎 Traitement de : 4100-2310 RetEx aeroGLIGLI.md
+✅ Fichier 4100-2310 RetEx aeroGLIGLI.md restauré depuis la révision 0BzG39yV_0IdPbDZEaDk0cVM3aUQ1bndUblljUm4zZkVBUXlZPQ
+🔎 Traitement de : 4100-2403 Panne décollage CT.md
+✅ Fichier 4100-2403 Panne décollage CT.md restauré depuis la révision 0BzG39yV_0IdPZFN1UURWS0xrNXNlV21oZEFQcEhsTDJtbTdZPQ
+🔎 Traitement de : 0200_2401 Restructuration Archives.md
+✅ Fichier 0200_2401 Restructuration Archives.md restauré depuis la révision 0BzG39yV_0IdPTGNxRUpzamlQRzI0anpIb3ZhZ1ZSRGxQVTlrPQ
+🔎 Traitement de : -2504 new project.md
+❌ Fichier -2504 new project.md non trouvé sur Google Drive.
+🔎 Traitement de : Administration & Maison-2504 new project.md
+❌ Fichier Administration & Maison-2504 new project.md non trouvé sur Google Drive.
+🔎 Traitement de : 1000-2504 new project.md
+✅ Fichier 1000-2504 new project.md restauré depuis la révision 0BzG39yV_0IdPanprRGcyNTFyVkRUR28weG8reUtDVm90andjPQ
+🔎 Traitement de : 2100-2504 new project.md
+❌ Fichier 2100-2504 new project.md non trouvé sur Google Drive.
+
+🎯 Processus de restauration terminé (mode dry run = False)

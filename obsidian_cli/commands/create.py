@@ -19,8 +19,11 @@ def create(
     """Commande CLI pour créer une note."""
     settings = Settings()
     ontology = Ontology(settings.config.get("relationships", {}))
-    file_path = create_note(note_type, title, settings, ontology, classifier_code, parent_uuid)
-    typer.secho(f"✅ Note créée : {file_path}", fg=typer.colors.GREEN)
+    file_path, key = create_note(note_type, title, settings, ontology, classifier_code, parent_uuid)
+    typer.secho("✅ Note créée :", fg=typer.colors.GREEN, nl=False)
+    typer.secho(f" {key}", fg=typer.colors.BLUE, nl=False)
+    typer.secho(f" {file_path}", fg=typer.colors.GREEN)
+
 
 def register(app: typer.Typer):
     app.add_typer(create_app, name="create")

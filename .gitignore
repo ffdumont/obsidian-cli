@@ -8,3 +8,4 @@ requirements-dev.txt
 *.egg-info/
 dist/
 build/
+special restore operation/credentials.json

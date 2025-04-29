@@ -1,7 +1,13 @@
 {
   "vault_path": "G:/Mon Drive/",
   "templates_path": "G:/Mon Drive/!5-Resources/0200 Gestion du Système d'Information/0270 Modèles",
-  "structure": ["area", "project", "task"],
+  "structure": {
+    "area": { "prefix": "A" },
+    "project": { "prefix": "P" },
+    "task": { "prefix": "T" },
+    "epic": { "prefix": "E" },
+    "story": { "prefix": "S" }
+  },
   "relationships": {
     "parent": {
       "task": ["project"],
@@ -14,9 +20,10 @@
   },
   "namingPattern": {
     "area": "{classifier} {name}",
-    "project": "{classifier}-{date:yyMM} {name}",
+    "project": "{classifier}-{date} {name}",
     "task": "{name}"
   },
+  "classificationPath": "G:/Mon Drive/!5-Resources/0200 Gestion du Système d'Information/0270 Modèles/classification.txt",
   "dateFormat": "%y%m",
   "debug": true
 }
